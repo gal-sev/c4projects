@@ -27,4 +27,8 @@ export class StorageHandler {
     return output;
   }
 
+  clearAll():void {
+    localStorage.clear();
+  }
+
 }

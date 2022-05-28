@@ -29,6 +29,21 @@ $task-back-color: #eeeeee;
   }
 }
 
+@mixin buttonDef($back_color, $back_color_clicked, $border_color, $color, $width) {
+  width: $width;
+  background-color: $back_color;
+  border-radius: 5px;
+  color: $color;
+  border: 1px solid $border_color;
+  box-shadow: 0 3px #999;
+  transition: 0.2s;
+  &:active{
+    background-color: $back_color_clicked;
+    box-shadow: 0 2px #666;
+    transform: translateY(2px);
+  }
+}
+
 body {
   font-family: $font-famaly;
   color: $text-color;
@@ -72,18 +87,8 @@ body {
         }
       }
       .addBtn{
-        width: 35px;
-        background-color: #0dcaf0;
-        border-radius: 5px;
-        color: white;
-        border: 1px solid #0d9df0;
-        box-shadow: 0 3px #999;
-        transition: 0.2s;
-        &:active{
-          background-color: #0d99f0;
-          box-shadow: 0 2px #666;
-          transform: translateY(2px);
-        }
+        @include buttonDef(#0dcaf0, #0d99f0, #0d9df0, white, 35px);
+        margin-left: 10px;
       }
     }
 
@@ -126,6 +131,19 @@ body {
           }
         }
         
+      }
+    }
+
+    .bottomBody {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      
+      .clearBtn{
+        @include buttonDef(rgba(255, 0, 0, 0.755), rgb(255, 0, 0), rgb(36, 0, 0), white, 80px);
+        height: 45px;
+        font-size: medium;
+        font-weight: 700;
       }
     }
   }

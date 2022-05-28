@@ -15,6 +15,7 @@ export class TaskHandler {
     this.createTaskHTML(text, this.tasks.length);
     this.tasks.push(new_task);
     this.sth.storeTask(new_task, this.tasks.length);
+    this.updateTaskCounter();
   }
 
   removeTask(index: number): void {    
@@ -25,6 +26,7 @@ export class TaskHandler {
     }
     this.sth.unstoreTask(index+1);
     this.reorderTaskIDs(index);
+    this.updateTaskCounter();
   }
 
   toggleTask(index: number): void {
@@ -37,6 +39,7 @@ export class TaskHandler {
     } else {
       task_el.children[1].className = "taskInput";
     }
+    this.updateTaskCounter();
   }
 
   editTask(index: number, text: string): void {
@@ -89,15 +92,6 @@ export class TaskHandler {
     }*/
     task_div.appendChild(text_inp_p);
 
-    /*const edit_b: HTMLButtonElement = document.createElement("button");
-    edit_b.onclick = () => {
-      this.editTask(Number(task_div.id.substring(5)), text_inp_p.innerText + 1);
-    };
-    const edit_i: HTMLElement = document.createElement("i");
-    edit_i.classList.add("far", "fa-edit", "editBtn");
-    edit_b.appendChild(edit_i);
-    task_div.appendChild(edit_b);*/
-
     const remove_b: HTMLButtonElement = document.createElement("button");
     remove_b.onclick = () => {      
       this.removeTask(Number(task_div.id.substring(5)))
@@ -111,7 +105,7 @@ export class TaskHandler {
     task_list.appendChild(task_div);
   }
 
-  loadStorage() {
+  loadStorage(): void {
     let storage: any[] = this.sth.getAllTasks();
     for (let i = 0; i < storage.length; i++) {
       let new_task: Task = new Task({finished: storage[i].finished, text: storage[i].text});
@@ -119,6 +113,24 @@ export class TaskHandler {
       this.tasks.push(new_task);
       
     }
+    this.updateTaskCounter();
+  }
+
+  clearStorage(): void {
+    this.sth.clearAll();
+    this.tasks = [];
+    location.reload();
+  }
+
+  updateTaskCounter(): void {
+    const counter_el = document.getElementById("taskCounter") as HTMLParagraphElement;
+    let unfinished_tasks: number = 0;
+    for (let i = 0; i < this.tasks.length; i++) {
+      if(!this.tasks[i].finished) {
+        unfinished_tasks++;
+      }
+    }
+    counter_el.innerText = "You have " + unfinished_tasks + " tasks remaning";
   }
 
 }

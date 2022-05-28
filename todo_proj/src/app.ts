@@ -9,6 +9,7 @@ function mainFunc(): void {
     console.log("loading tasks");
     tasks.loadStorage();
 
+
 }
 
 export function addTask(): void {
@@ -20,4 +21,8 @@ export function addTask(): void {
         console.log("Write text before adding task");
         
     }
+}
+
+export function clearAllTasks(): void {
+    tasks.clearStorage();
 }
