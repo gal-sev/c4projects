@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Starter Project</title>
+  <base href="/">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js"></script>
+</head>
+<body>
+  <div class="todoBody">
+    <h1>Todo List</h1>
+    <div class="insertDiv">
+      <input type="text" id="input_main_task" name="fname" class="textInput" placeholder="add task to list">
+      <button onclick="app.addTask()" class="addBtn"><i class="fa fa-plus"></i></button>
+    </div>
+    <div class="taskList" id="taskList">
+    </div>
+  </div>
+</body>
+</html>

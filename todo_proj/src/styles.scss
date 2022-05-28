@@ -1,0 +1,132 @@
+$font-famaly: Arial, Helvetica, sans-serif;
+$primary-color: #e7e8d4;
+$text-color: #000000; //white
+$todo-back-color: #ffffff;
+$task-back-color: #eeeeee;
+
+
+@mixin taskInp($isFinished) {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 300px;
+  border: 0px;
+  background-color: $task-back-color;
+  font-size: medium;
+  transition: 0.2s;
+  @if $isFinished {
+    text-decoration: line-through rgba(0, 0, 0, 0.733);
+    color: gray;
+  }
+  &:focus{
+    @if $isFinished {
+      text-decoration: line-through rgba(0, 0, 0, 0.733);
+      color: gray;
+    }
+    margin-right: 5px;
+    border: 0px;
+    outline: 2px solid #69bbff;
+    outline-offset: -2px;
+  }
+}
+
+body {
+  font-family: $font-famaly;
+  color: $text-color;
+  background: $primary-color;
+
+  .todoBody {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    padding: 0px 15px 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid black;
+    transform: translate(-50%, -50%);
+    border: 0px;
+    border-radius: 10px;
+    background-color: $todo-back-color;
+    filter: drop-shadow(0px 0px 8px #bfc0b6c5);
+
+    h1 {
+      text-align: center;
+    }
+
+    .insertDiv{
+      padding-bottom: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      .textInput{
+        padding: 5px;
+        width: 280px;
+        font-size: large;
+        border: 2px dashed #98d1ff;
+        border-radius: 8px;
+        outline: 0px;
+        transition: 0.2s;
+        &:focus{
+          outline: 2px solid #69bbff;
+          outline-offset: -2px;
+        }
+      }
+      .addBtn{
+        width: 35px;
+        background-color: #0dcaf0;
+        border-radius: 5px;
+        color: white;
+        border: 1px solid #0d9df0;
+        box-shadow: 0 3px #999;
+        transition: 0.2s;
+        &:active{
+          background-color: #0d99f0;
+          box-shadow: 0 2px #666;
+          transform: translateY(2px);
+        }
+      }
+    }
+
+    .taskList {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      .task{
+        display: flex;
+        flex-direction: row;
+        border-radius: 10px;
+        background-color: $task-back-color;
+        padding: 3px 8px 3px 8px; //top right down left
+        width: 350px;
+        align-items: center;
+
+        .taskInput{
+          @include taskInp(false);
+        }
+        .taskInputFinished{
+          @include taskInp(true);
+        }
+        .editBtn{
+          padding-right: 4px;
+          color: rgba(0, 0, 255, 0.672);
+        }
+        .removeBtn{
+          color: red;
+        }
+
+        button{
+          border: 0px;
+          transform: scale(1.3);
+          transition: 0.05s;
+          &:hover{
+            transform: scale(1.5);
+          }
+          &:active{
+            transform: scale(1.5) translateY(1px);
+          }
+        }
+        
+      }
+    }
+  }
+}
